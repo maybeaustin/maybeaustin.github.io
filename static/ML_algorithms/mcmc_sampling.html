@@ -44,10 +44,10 @@ This is because the number of grid points needed grows exponentially in the dime
 One approach is to use <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte-Carlo sampling</a>.
 A simple Law of Large Numbers Theorem states that if we can generate a sequence of i.i.d random variables $(X_k)$ distributed $pdm$, then
 \[
-\frac{1}{n} \lim_{n \to \infty} f(X_k) \to \int_{x \in \mathbb{R}^d} f(x) p(x) dx
+\frac{1}{n} \lim_{n \to \infty} \sum_{k = 1}^n f(X_k) \to \int_{x \in \mathbb{R}^d} f(x) p(x) dx
 \]
 almost everywhere pdm.
-But how do we generate the i.i.d random variables $(X_k)$ on computer?
+But how do we generate the i.i.d random variables $(X_k)$ on a computer?
 
 <br>
 <br>
