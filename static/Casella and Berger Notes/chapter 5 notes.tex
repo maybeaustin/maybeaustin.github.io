@@ -1,0 +1,251 @@
+\documentclass[12pt, reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, setspace, hyperref}
+\numberwithin{equation}{section}
+\parindent 0mm
+\onehalfspacing
+\addtolength{\textwidth}{2 truecm}
+\setlength{\hoffset}{-1 truecm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\w}{\omega}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+\let\phi\varphi
+
+\newcommand{\intersect}{\bigcap}
+\newcommand{\union}{\bigcup}
+\newcommand{\disjointunion}{\coprod} 
+\newcommand{\powerset}{\mathcal{P}}
+\newcommand{\dist}{\sim}
+\renewcommand{\P}{P}
+\newcommand{\E}{\text{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\given}{\mid}
+\newcommand{\mean}{\bar}
+
+\begin{document}
+
+\title{Casella and Berger Notes and Problems -  Chapter 5}
+\author{Austin David Brown}
+\maketitle
+
+
+Using this problem set:
+http://www.stat.ufl.edu/~jhobert/sta6327
+
+Chapter 5: 3, 5, 6, 11, 12, 15, 16, 17, 19, 21, 22
+
+Chapter 5: 23, 24, 25, 30, 32, 34, 42, 44, 47, 49, 50, 52, 53
+
+Chapter 5: 58 (in part (a), assume $t \in (0,1)$, 62, 63, 64, 66
+
+\section*{Chapter 5 Exercises}
+
+(5.3)
+
+Since each $Y_i = 1_{X_i > \mu}$ is a characteristic function, and $(X_i)$ are iid, the sum is binomial.
+
+(5.5)
+
+I think by convolution $F_{\sum_{1 \le k l\e n} X_k}$ has a density, but
+suppose $F_{\sum_{1 \le k l\e n} X_k}$ exists with density $f_{\sum_{1 \le k \le n} X_k}$.
+Then
+\begin{align*}
+F_{\mean{X}}(x)
+&= P(y : \mean{X}(y) \le x) \\
+&= P(y : \sum_{1 \le k \le n}{X_k}(y) \le nx) \\
+&= F_{\sum_{1 \le k \le n}{X_k}}(nx) \\
+&= \int_{\sum_{1 \le k \le n}{X_k} \le nx} dF_{\sum_{1 \le k \le n}{X_k}} .
+\end{align*}
+
+By change of variables and since $F_{\sum_{1 \le k \le n}{X_k}}$ has a density,
+\begin{align*}
+&= \int_{\sum_{1 \le k \le n}{X_k} \le x} n dF_{\sum_{1 \le k \le n}{X_k}} \\
+&= \int_{\sum_{1 \le k \le n}{X_k} \le x} n f_{\sum_{1 \le k \le n}{X_k}}(x) dx.
+\end{align*}
+
+By definition of the density being the integrand, we are done.
+
+(5.6)
+
+(a) this is the same as idea  as the convolution basically.
+
+(b) TODO This one is a lot of work and I had to use trichotemy, so I will think about it.
+
+(c) Same as (b)
+
+(5.11)
+Contradiction with the variance identity works for both of these or use Jensons inequality since root is concave.
+
+(5.12)
+
+(a)
+
+Let $(X_k)_{k = 1}^n$ be iid $N(0, 1).$
+By using the pushforward measure twice,
+\[
+E Y_1
+= \int_{\Omega} Y_1 dP
+= \int_{\R} y_1 dP_{Y_1}
+= \int_{\R} | \mean{x_n} | dP_{(X_k)}.
+\]
+By definition, additivity, and change of variables,
+\[
+= \int_{-\infty}^0 -\mean{x_n} dP_{(X_k)} + \int_0^{\infty} \mean{x_n} dP_{(X_k)}
+= 2 \int_0^{\infty} \mean{x_n} dP_{(X_k)}.
+\]
+By additivity and Fubini,
+\[
+=  \frac{2}{n} \sum_{k = 1}^n \int_0^{\infty} x_k dP_{X_k}
+\]
+Since $X_k$ is $N(0, 1)$, it has density, so by change of variables,
+\[
+=  \frac{2}{n} \sum_{k = 1}^n \int_0^{\infty} x_k f_{X_k}(x_k) dx_k 
+=  \frac{2}{n} \frac{1}{\sqrt{2 \pi}} \sum_{k = 1}^n \int_0^{\infty} x_k \exp(-1/2 x_k^2) dx_k.
+\]
+Let $\phi(x) = -1/2 x^2$. Then $D_1 \phi(x) = -x$, and by the Inverse Function Theorem, $\phi$ is a diffeomorphism on $(0, \infty)$.
+
+Since the boundary of $\phi(0, \infty)$ has measure 0, the interval is integrable. By change of variables,
+\[
+\int_{\phi(0, \infty)} e^{u} du
+= \int_{(-\infty, 0)} e^{u} du
+= 1
+= \int_0^\infty e^{-1/2 x_k^2} x_k dx_k.
+\]
+Hence,
+\[
+=  \frac{2}{n} \frac{1}{\sqrt{2 \pi}} \sum_{k = 1}^n
+= \sqrt{\frac{2}{\pi}}.
+\]
+
+(b) Skipping since part (a) was so long with all the theorems.
+
+(5.15)
+
+(a) follows from definition
+
+(b) TODO I got a different answer
+
+(5.16)
+
+These are straight forward, though I forgot the t distribution.
+
+(5.17)
+TODO
+
+(5.19)
+TODO
+
+(5.21)
+TODO
+
+(5.22)
+TODO
+
+(5.23)
+TODO
+
+(5.24)
+TODO
+
+(5.25)
+TODO
+
+(5.30)
+TODO
+
+(5.32)
+TODO
+
+(5.34)
+Straight forward.
+
+(5.42)
+TODO
+
+(5.44)
+
+(a) Follows directly from CLT.
+
+(5.47)
+TODO
+
+(5.49)
+TODO
+
+(5.50)
+TODO
+
+(5.52)
+TODO
+
+(5.53)
+TODO
+
+
+\section*{Notes}
+
+8 / 4
+\rule{\textwidth}{.5pt}
+
+TODO convolution proof.
+
+8 / 5
+\rule{\textwidth}{.5pt}
+
+The real insight to the normal distribution is in the gamma function. The normal distribution is a special case of the gamma function by change of variables.
+
+The gamma distribution is more fundamental in continuous distributions.
+
+Actually, the gamma distribution is the most fundamental continuous distribution.
+
+Change of variables is a super important theorem in statistics. TODO go through the proof. 
+
+THE GAMMA FUNCTION IS THE MOST FUNDAMENTAL THING IN CONT DISTS
+GAMMA = Normal with change of variables
+GAMMA = Chi Square
+
+ALL OF THE CONTINUOUS STUFF FOLLOWS FROM THE GAMMA FUNCTION AND CHANGE OF VARIABLES!
+
+Convolution is used over and over.
+
+TODO Convolution proof
+
+DONT FORGET
+Probability is just integration over indicators using change of variables.
+
+$P(X \in A) = \int I_A dP$
+
+TODO PROVE CHANGE OF VARIABLES and CHANGE OF VARIABLES IN MEASURES (See Folland)
+
+TODO study Change of Variables extremely well. It is probably the most important concept.
+
+Since $x + y \mapsto e^x e^y$ is a homomorphism between the additive group and the multiplicative group, combined with independence an exponential function makes use of this property such as the Gamma function.
+
+8 / 6
+\rule{\textwidth}{.5pt}
+
+Chebyshev is a really useful inequality.
+
+basically all the discrete distributions can be approximated by the CLT with some algebra manipulations.
+
+TODO study properties of characteristic functions because of this:
+\[
+P(X \le a) = \int_{\Omega} 1_{x : X \le a} dP
+\]
+
+8 / 7
+\rule{\textwidth}{.5pt}
+
+So many applications of change of variables!!
+
+Think of the joint distribution as the identity function for the vector $(X_k)$.
+
+8 / 8
+\rule{\textwidth}{.5pt}
+
+\end{document}

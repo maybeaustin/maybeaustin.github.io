@@ -1,0 +1,288 @@
+\documentclass[12pt, reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, setspace, hyperref}
+\numberwithin{equation}{section}
+\parindent 0mm
+\onehalfspacing
+\addtolength{\textwidth}{2 truecm}
+\setlength{\hoffset}{-1 truecm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\w}{\omega}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\newcommand{\intersect}{\bigcap}
+\newcommand{\union}{\bigcup}
+\newcommand{\disjointunion}{\coprod} 
+\newcommand{\powerset}{\mathcal{P}}
+\newcommand{\dist}{\sim}
+\renewcommand{\P}{P}
+\newcommand{\E}{\text{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\given}{\mid}
+
+\begin{document}
+
+\title{Casella and Berger Notes and Exercises -  Chapter 1}
+\author{Austin David Brown}
+\maketitle
+
+\section*{Chapter 1 Exercises}
+
+Using this problem set:
+http://www.stat.ufl.edu/~jhobert/sta6326
+
+Chapter 1: 1, 2, 4, 13, 14, 16, 18, 21, 22, 23, 24, 27, 33
+
+Chapter 1: 35, 38, 39, 44, 46, 47, 49, 50, 51, 52, 54
+
+{\bf (1.1), (1.2), (1.4), (1.13), (1.14) \rule{\textwidth}{.5pt}}
+
+These are straight forward.
+
+{\bf (1.16)\rule{\textwidth}{.5pt}}
+
+These follow from multiplication rule.
+
+{\bf (1.18)\rule{\textwidth}{.5pt}}
+
+I got
+\[
+\frac{n \binom{n - 1}{n - 2} }{ \binom{2n - 1}{n} },
+\]
+which I guess is incorrect.
+
+{\bf (1.21)\rule{\textwidth}{.5pt}}
+
+TODO tough one.
+
+{\bf (1.22)\rule{\textwidth}{.5pt}}
+
+(a)
+
+Let $S$ $\equiv$ 180 days chosen from 366.
+Then $|S| = \binom{366}{180}$.
+Also, $180/12 = 15$.
+Let $E$ $\equiv$ 180 days distributed amongst the 12 months equally.
+We use Vandermonde's identity applied to each month as a group.
+By Vandermonde's identity $12$ times with $366 = 31 + \cdots 31$ and $180 = k_1 + \cdots k_{12}$, we have
+\[
+\binom{366}{180}
+= \sum_{k_1 = 0}^{31} \cdots \sum_{k_{12} = 0}^{31} \binom{31}{k_1} \cdots \binom{31}{k_{12}}.
+\]
+Hence,
+\[
+P(E) = \frac{\binom{31}{15} \cdots \binom{31}{k_{15}}}{\binom{366}{180}}.
+\]
+
+(b)
+TODO not sure how to count this one.
+
+{\bf (1.23)\rule{\textwidth}{.5pt}}
+
+I think this works.
+
+Let $S \equiv$ $2n$ flips from the $2$ people.
+Then $|S| = 2^n 2^n$.
+Let $E \equiv$ both people flip the same number of heads.
+There are 2n total heads and we want to choose all n-subsets of them.
+So, $\binom{n + n}{n}$ is the count of n-subsets of heads from a total of 2n heads.
+Hence,
+\[
+P(E) = \frac{\binom{n + n}{n}}{2^n 2^n}.
+\]
+
+
+{\bf (1.24)\rule{\textwidth}{.5pt}}
+
+This is a geometric distribution problem.
+
+Need some more practice with this distribution.
+
+{\bf (1.27)\rule{\textwidth}{.5pt}}
+
+TODO Skipping these until I study more combinatorics.
+
+{\bf (1.33)\rule{\textwidth}{.5pt}}
+
+Partition the space by Males and Females and then use the definition of conditional probability.
+
+\begin{align*}
+P(\text{Male} \given \text{Colorblind})
+&= \frac{P( \{ \text{Male} \} \intersect \{ \text{Colorblind}) \} }{ P( \{ \text{Colorblind}) \} } \\
+&= \frac{P( \{ \text{Male} \} \intersect \{ \text{Colorblind}) \} }{ P( \{ \text{Male} \} \intersect \{ \text{Colorblind}) \} + P( \{ \text{Female} \} \intersect \{ \text{Colorblind}) \}}.
+\end{align*}
+
+{\bf (1.35) \rule{\textwidth}{.5pt}}
+
+This follows straight from the definition of a measure.
+Let $P : \Omega \to [0, 1]$ be a probability measure.
+Let $B \in \Omega$ such that $B > 0.$
+Let $(E_k)_{k \in \N}$ be disjoint sets in $\Omega.$
+Then
+$P(\emptyset \given B) = \emptyset$.
+Since $P$ is a measure, we have
+\[
+P(\union_{k \in \N} E_k \given B)
+= \frac{P(\union_{k \in \N} E_k \intersect B)}{P(B)}
+= \sum_{k \in \N}  \frac{P(E_k \intersect B)}{P(B)}
+=\sum_{k \in \N}  P(E_k \given B).
+\]
+Therefore, it is a measure.
+
+{\bf (1.38) \rule{\textwidth}{.5pt}}
+
+All of these follow straight from the definitions.
+
+{\bf (1.39) \rule{\textwidth}{.5pt}}
+
+Follows straight from the definitions
+
+{\bf (1.44) \rule{\textwidth}{.5pt}}
+
+Let $X$ be an RV that measures \# of correct answers. Then $X$ is $bin$, and
+\[
+P(10 \le X)
+= P(10 \le X \le 20)
+= \sum_{k = 10}^{20} \binom{20}{k} (1/4)^{k} (3/4)^{20 - k}
+\]
+
+{\bf (1.46) \rule{\textwidth}{.5pt}}
+
+TODO tough one.
+
+{\bf (1.47) \rule{\textwidth}{.5pt}}
+
+These are all straight forward unless you think it said pdf like I did.
+
+{\bf (1.49) \rule{\textwidth}{.5pt}}
+
+Follows directly from definitions using compliments.
+
+Let $t \in \R.$
+If $F_X(t) \le F_Y(t)$,
+\[
+P(Y \in \R) - F_Y(t) \le P(X \in \R) - F_Y(t)
+\iff P(Y > t) \le P(X > t).
+\]
+The second part follows from the second part of the definition.
+
+{\bf (1.50) \rule{\textwidth}{.5pt}}
+
+Using discrete calculus,
+\[
+\sum_{k = 1}^n t^{k - 1}
+= \sum_{1 \le k \le n + 1} \Delta_k \frac{1}{t - 1}  t^{k - 1}
+= \frac{t^n - 1}{t - 1}.
+\]
+
+Discrete solutions are so neat.
+
+{\bf (1.51) \rule{\textwidth}{.5pt}}
+
+Since we are choosing without replacement from 2 groups, this is a hypergeometric problem.
+
+By Vandermode's identity,
+\[
+\binom{30} {5}
+= \sum_{k = 1}^5 \binom{5}{k} \binom{25}{5 - k}
+\]
+iff
+\[
+1
+= \binom{30} {5}^{-1} \sum_{k = 1}^5 \binom{5}{k} \binom{25}{5 - k}
+\]
+yields the pmf and cdf.
+
+{\bf (1.52) \rule{\textwidth}{.5pt}}
+
+Follows directly from definitions.
+
+{\bf (1.54) \rule{\textwidth}{.5pt}}
+
+Both of these are easy.
+
+(a) Use Riemann-Lebesgue for the endpoints, and FTC.
+
+(b) Use additivity of the integral.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section*{Notes}
+
+7 / 30
+\rule{\textwidth}{.5pt}
+
+8 / 1
+\rule{\textwidth}{.5pt}
+
+On section 1.4 currently
+
+discrete distributions:
+characteristic functions
+geometric
+binomial
+
+8 / 2
+\rule{\textwidth}{.5pt}
+
+
+8 / 3
+\rule{\textwidth}{.5pt}
+
+8 / 4
+\rule{\textwidth}{.5pt}
+
+Difference operators properties are awesome!
+
+\url{en.wikipedia.org/wiki/Finite_difference#Rules_for_calculus_of_finite_difference_operators}
+
+In fact, this is much more enlightening than just using the geometric series.
+
+Finite difference calculus
+
+Hypergeometric and Binomial distributions are closely related.
+
+
+8 / 19
+\rule{\textwidth}{.5pt}
+
+Ok I read chapter 1 completely now.
+
+Need to do the problem set and move on to chapter 2
+
+8 / 20
+\rule{\textwidth}{.5pt}
+
+Problem set
+
+Memorize and understand the main Discrete Distributions:
+------------
+Discrete Uniform
+Bournoulli, Binomial, Poisson, Multinomial
+Hypergeometric, Multivariate Hypergeometric distribution
+Geometric, Negative Binomial
+
+These are really fundamental::
+-----------
+Multinomial and Multivariate Hypergeometric.
+Multinomial - replacement
+Multivariate Hypergeometric - no replacement
+
+See Wikipedia for Hypergeometric distribution
+
+\end{document}

@@ -1,0 +1,139 @@
+\documentclass[12pt, reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, setspace, hyperref}
+\numberwithin{equation}{section}
+\parindent 0mm
+\onehalfspacing
+\addtolength{\textwidth}{2 truecm}
+\setlength{\hoffset}{-1 truecm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\w}{\omega}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+\let\phi\varphi
+
+\newcommand{\intersect}{\bigcap}
+\newcommand{\union}{\bigcup}
+\newcommand{\disjointunion}{\coprod} 
+\newcommand{\powerset}{\mathcal{P}}
+\newcommand{\dist}{\sim}
+\renewcommand{\P}{P}
+\newcommand{\E}{\text{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\given}{\mid}
+\newcommand{\mean}{\bar}
+
+\begin{document}
+
+\title{Casella and Berger Notes and Problems -  Chapter 6}
+\author{Austin David Brown}
+\maketitle
+
+Chapter 6: 1, 2, 3, 5, 7, 10, 13, 14, 17, 19, 21, 22, 24, 30
+
+\section{Problems}
+
+(6.1)
+
+Use Factorization Theorem.
+
+(6.2)
+TODO
+
+(6.3)
+TODO
+
+(6.5)
+TODO
+
+(6.7)
+TODO
+
+(6.10)
+TODO
+
+(6.13)
+TODO
+
+(6.14)
+TODO
+
+(6.17)
+TODO
+
+(6.19)
+
+Some algebra shows g is not constant in respect to $p$.
+
+(6.21)
+
+(a) Look at the map $F(v) = (p_{X(-1)} v_1, p_{X(0)} v_2, p_{X(1)} v_3)$ on the space $g(-1) \times g(0) \times g(1)$. The map is not injective, and hence $g$ is not $0$.
+
+(b) Look at the map $F(v) = (p_{X(0)} v_2, p_{X(1)} v_3)$ on the space $g(0) \times g(1)$. The map is injective, and hence $g$ is $0$.
+
+(c) Yes, by algebra. The exponential family in part (a) is not full rank in the sense of exponential families is where the problem lies.
+
+(6.24)
+I believe this failed for $\lambda = 0.$
+
+(6.30)
+TODO
+
+\section{Notes}
+
+8 / 8
+\rule{\textwidth}{.5pt}
+
+8 / 9
+\rule{\textwidth}{.5pt}
+
+8 / 10
+\rule{\textwidth}{.5pt}
+
+The definiitons:
+Exponential Family
+Sufficient statistic
+Minimal sufficient statistic
+complete statistic
+Factoring Theorem
+Basu Theorem
+Complete Statistic Thm for Exponential Families
+Ancillary Statistic
+MLE statistic
+
+Examples of these:
+
+Really the normal distribution is Gamma with change of variables. So it is obvious that things will have a normal distribution becuase gamma is a generalization of a factorial.
+
+Common order statistics:
+max, min, range, median
+
+8 / 11
+\rule{\textwidth}{.5pt}
+
+Exponential familes
+
+The normal and these are based off of the gamma distribution.
+
+The normal distribution is really just the gamma function.
+
+All of these exponential familes originate with the gamma function which originates with factorial which represents permutations.
+
+Def. Complete Statistic
+X is complete if the kernel of the linear map E is 0 from the space of $A \circ imX \to \R^n$
+
+This is really a better definition.
+
+I think Lp spaces are going to lead to some more insight into what is going on with some of this stuff.
+
+\begin{thebibliography}{1}
+
+\bibitem{durett}
+Casella and Berger. \textit{Statistical Inference}.
+\end{thebibliography}
+
+\end{document}
