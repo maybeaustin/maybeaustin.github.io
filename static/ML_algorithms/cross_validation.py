@@ -1,59 +1,43 @@
 import numpy as np
-
-from sklearn import datasets, svm
-digits = datasets.load_digits()
-X_digits = digits.data
-y_digits = digits.target
-svc = svm.SVC(C=1, kernel='linear')
-svc.fit(X_digits[:-100], y_digits[:-100]).score(X_digits[-100:], y_digits[-100:])
-
-X_folds = np.array_split(X_digits, 3)
-y_folds = np.array_split(y_digits, 3)
-scores = list()
-for k in range(3):
-    # We use 'list' to copy, in order to 'pop' later on
-    X_train = list(X_folds)
-    X_test = X_train.pop(k)
-    X_train = np.concatenate(X_train)
-    y_train = list(y_folds)
-    y_test = y_train.pop(k)
-    y_train = np.concatenate(y_train)
-    scores.append(svc.fit(X_train, y_train).score(X_test, y_test))
-print(scores)  
-
-from sklearn.model_selection import GridSearchCV, cross_val_score
-Cs = np.logspace(-6, -1, 10)
-clf = GridSearchCV(iid = False, cv = 5, estimator=svc, param_grid=dict(C=Cs),
-                   n_jobs=-1)
-clf.fit(X_digits[:1000], y_digits[:1000])        
-
-clf.best_score_                                  
-
-clf.best_estimator_.C                            
-
-
-# Prediction performance on test set is not as good as on train set
-clf.score(X_digits[1000:], y_digits[1000:])  
-
-
-
-
-import time
-
-def foo(x):
-  return x * x
-
-start = time.time()
-I = [i for i in range(0, 100000)]
-for i in I:
-  foo(i)
-end = time.time()
-print(end - start)
-
+import matplotlib.pyplot as plt
 from multiprocessing import Pool
+from sklearn import svm
+
+
+###
+# Opdigits test dataset
+###
+test = np.loadtxt("data/optdigits_test.txt", delimiter = ",")
+X = test[:, 0:64]
+y = test[:, 64]
+
+def cvK(X, y, tuning_params, partitions, k):
+  n_tuning_params = tuning_params.shape[0]
+
+  partition = partitions[k]
+  TRAIN = np.delete(np.arange(0, X.shape[0]), partition)
+  TEST = partition
+  X_train = X[TRAIN, :]
+  y_train = y[TRAIN]
+
+  X_test = X[TEST, :]
+  y_test = y[TEST]
+
+  accuracies = np.zeros(n_tuning_params)
+  for i in range(0, n_tuning_params):
+    svc = svm.SVC(C = tuning_params[i], kernel = "linear")
+    accuracies[i] = svc.fit(X_train, y_train).score(X_test, y_test)
+  return accuracies
+
+K = 5
+tuning_params = np.logspace(-6, -1, 10)
+partitions = np.array_split(np.random.permutation([i for i in range(0, X.shape[0])]), K)
+
 pool = Pool()
-start = time.time()
-pool.map(foo, I)
-end = time.time()
-print(end - start)
+args = [(X, y, tuning_params, partitions, k) for k in range(0, K)]
+Accuracies = np.array(pool.starmap(cvK, args))
 pool.close()
+
+CV_accuracy = np.mean(Accuracies, axis = 0)
+best_tuning_param = tuning_params[np.argmax(CV_accuracy)]
+print(best_tuning_param)

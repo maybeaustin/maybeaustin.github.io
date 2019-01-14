@@ -16,15 +16,11 @@ experimental design optimization from boyd
 
 SVD and other LA algorithms maybe another topic for this?
 
-gradient boosting
-random forest
-
 ADAM, SGD other algorithms
 
 TODO learn approximation weistrass, etc terry tao?
 
 Calculus of Variations
-
 
 Sampling algorithms:
 generate uniform
