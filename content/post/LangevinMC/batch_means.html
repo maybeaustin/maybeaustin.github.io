@@ -1,0 +1,51 @@
+---
+title: "Batch Means for Variance Estimation in Langevin Monte Carlo"
+date: "2019-05-27"
+categories:
+- Langevin Monte Carlo
+- Monte Carlo
+- MCMC
+tags:
+- Langevin Monte Carlo
+- Monte Carlo
+- MCMC
+---
+$
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+$
+
+This approach is to estimate the variance using the Markov chain.
+
+<h3>Batch Means</h3>
+
+Let $(X_k)$ be the Markov chain and $f : \mathbb{R}^d \to \mathbb{R}$.
+The functional CLT is the motivation here.
+Divide the chain $(X_k)$ into $b$ non-overlapping batches so that $n = b m$.
+Estimate the batch mean by $B_k = \frac{1}{b} \sum_{i = 1}^{b} f(X_{bk + i})$.
+The estimate of the variance of the batch mean is
+
+\[
+S^2_{BM} = \frac{b}{n} \sum_{k = 0}^{m - 1} (B_k - \bar{B_n})^2.
+\]
+
+This is not an i.i.d. sample and not consistent in general.
+I am not sure what the finite sample properties are here.
+
+<pre class="prettyprint lang-python">
+</pre>
+
+<pre>
+</pre>
+
+<h3>Overlapping Batch Means</h3>
+
+Overlapping batch means overlap and can be consistent. Since I am not concerned with consistency here, I will skip this one. 
+
+
+<h2>References.</h2>
+
+Boucheron, Stéphane; Thomas, Maud. Concentration inequalities for order statistics. Electron. Commun. Probab. 17 (2012), paper no. 51, 12 pp. doi:10.1214/ECP.v17-2210. https://projecteuclid.org/euclid.ecp/1465263184
+
+<!--  Twitter -->
+<br/>
+<br/>
