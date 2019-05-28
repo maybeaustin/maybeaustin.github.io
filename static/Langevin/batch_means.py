@@ -1,13 +1,11 @@
-import math
 import torch
 from torch.distributions import Normal
-import matplotlib.pyplot as plt
 
 torch.no_grad() 
 torch.manual_seed(0)
 torch.set_default_dtype(torch.float64)
 
-def LMC(N, h, X_0):
+def OULMC(N, h, X_0):
   X = torch.zeros(N, 2)
   X[0] = X_0
 
@@ -25,21 +23,6 @@ def LMC(N, h, X_0):
       X[i + 1] = X[i]
   return X
 
-# setup
-N = 10**3
-h = .1
-X_0 = torch.zeros(2).fill_(3)
-
-X = LMC(N, h, X_0)
-print(torch.mean(X, 0))
-
-"""
-plt.style.use("seaborn")
-plt.figure()
-plt.scatter(X[:, 0], X[:, 1], alpha=0.5, s=1)
-plt.show()
-"""
-
 def bmSE(X, M):
   N = X.size(0)
   M = M # how many batches
@@ -51,19 +34,21 @@ def bmSE(X, M):
     B_m = torch.mean(X.narrow(0, m * B, B), 0)
     S2_m = torch.pow(B_m - mu, 2)
     S2s.append(S2_m)
-  se = torch.sqrt(B * torch.mean(torch.stack(S2s), 0))
+  se = torch.sqrt(M * torch.mean(torch.stack(S2s), 0))
   return se
 
-torch.set_default_dtype(torch.float64)
-torch.no_grad() 
-torch.manual_seed(0)
-
-N = 1000
+N = 10**4
 h = .1
 X_0 = torch.zeros(2).fill_(3)
-X = LMC(N, h, X_0)
+X = OULMC(N, h, X_0)
 se = bmSE(X, 100)
 
+print(torch.mean(X, 0))
+print(se)
+
+bmSE(X, 100)
+
+"""
 for i in range(0, 100):
   X = LMC(N, h, X[N - 1, :])
   se_old = se
@@ -72,7 +57,15 @@ for i in range(0, 100):
   if torch.all(torch.abs(se - se_old) < .05):
     print("Converged at i =", i)
     break
+"""
 
+"""
+import matplotlib.pyplot as plt
+plt.style.use("seaborn")
+plt.figure()
+plt.scatter(X[:, 0], X[:, 1], alpha=0.5, s=1)
+plt.show()
+"""
 
 
 
