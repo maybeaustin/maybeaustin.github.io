@@ -1,0 +1,132 @@
+---
+title: "Continuous Langevin Markov Processes: Basic Stuff"
+date: "2019-06-01"
+categories:
+- Langevin Monte Carlo
+- Monte Carlo
+- MCMC
+tags:
+- Langevin Monte Carlo
+- Monte Carlo
+- MCMC
+---
+$
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\e}{\epsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathcal{F}}
+\let\phi\varphi
+$
+
+The motivation is that we want to understand a stochastic process by its local change.
+Lets do this in a concrete way using the Langevin SDE.
+Let $\Gamma = e^{-V}dm$ where m is Lebesgue measure on $\mathbb{R}^d$.
+Let the local change of the stochastic process $dX_t = -\nabla V(X_t)dt + \sqrt{2} dB_t$ where $B_t$ is $d$-dimensional Brownian motion.
+We need to show that solutions exist.
+
+<br>
+<br>
+
+<b>Thereom (Existence and Uniqueness). </b>
+<i>
+Suppose $V$ is L-Lipschitz with initial value $X_0 \in L_2(\nu)$ where $\nu$ is an initial distribution. Then there exists a unique a.e. and continuous a.e. limit $X_t$ with respect to the Brownian motion filtration $\nu \otimes \F_t$ such that 
+\[
+X_t = \int_0^t -\nabla V(X_s) ds  + \int_0^t \sqrt{2} dB_s.
+\]
+and $X_t$ is in $L_2(\nu \otimes \F_t)$.
+</i>
+
+<br>
+<br>
+
+<i>Proof. </i>
+Let $X_0$ be the initial value and
+\[
+X^n_t = \int_0^t -\nabla V(X^n_s) ds  + \int_0^t \sqrt{2} dB_s
+\]
+on $t \in [0, T]$ so that $X_t^n$ is a continuous process.
+By Lipschitz continuity, we have
+\[
+f_{n}(T)
+= E \max_{t \in [0, T]} \norm{X_t^{n + 1} - X_t^{n}}_2^2
+\le L^2 E \max_{t \in [0, T]} \norm{ X_t^{n} - X_t^{n - 1} }_2^2
+= L^2 f_{n - 1}(T).
+\]
+Since $f_0(T) \le L^2 T E\norm{X_0}_2$ and by recursion, we have
+\[
+E \max_{t \in [0, T]} \norm{ X_t^{n + 1} - X_t^{n} }_2^2
+\le L^{2n} \frac{T^{n + 1}}{(n + 1)!}
+\]
+The right-hand side is summable and thus by Borel-Cantelli, we have that $X_t^n$ is Cauchy a.e. $\nu \otimes F_t$ in the norm $max_{t \in [0, T]}| \cdot |$.
+Since this is a complete space with this norm, there is a unique and continuous limit $Y$.
+Also, it follows that the limit $Y$ is in $L_2(\nu \otimes \F_t)$.
+Using Lipschitz continuity again, we have
+\[
+\norm{Y - X_t}
+\le \lim_n \sup_{t \in [0, T]} \norm{\nabla V(X_t^n) - \nabla V(X_t)}
+\le L \lim_n \sup_{t \in [0, T]} \norm{ X_t^n - X_t }
+\to 0.
+\]
+holds a.e. $\nu \otimes \F_t$.
+
+<br>
+<br>
+
+Ito's formula gives a chain rule in stochastic calculus.
+
+<br>
+<br>
+
+<b>Thereom (Ito's Chain Rule). </b>
+<i>
+Let
+\[
+X_t = \int_0^t -\nabla V(X_s) ds  + \int_0^t \sqrt{2} dB_s.
+\]
+be a solution with initial value $X_0$ on $[0, T]$.
+Let $f : \mathbb{R}^d \to \mathbb{R}$ be a $C^2$ function.
+Then
+\[
+f(X_t) 
+= f(X_0) + \int_0^t \ip{-\nabla V(X_s)}{f(X_s)} + \Delta f(X_t) ds + \int_0^t \ip{\nabla f(X_s)}{\sqrt{2} dB_s}.
+\]
+and this is in $L_2$.
+</i>
+
+<br>
+<br>
+
+From Ito's chain rule, we get an analogous Fundamental Theorem of Calculus.
+Let $Lf(x) = \ip{-\nabla V(x)}{f(x)} + \Delta f(x)$.
+Then
+Ito's chain rule says that locally on $[0, T]$, we can use dominated convergence (or Fubini) and commute the integrals
+
+\begin{align*}
+E(f(X_t)|X_0 = x) 
+&= f(x) + E(\int_0^t L f(X_s) ds|X_0 = x)
+\\
+&= f(x) + \int_0^t E( L f(X_s) | X_0 = x) ds
+\end{align*}
+This says that $\partial_t E(f(X_t)|X_0 = x) = E( L f(X_t) | X_0 = x)$.
+For the same reasoning,
+
+\[
+\lim_{t \to 0} \frac{E(f(X_t)|X_0 = x) - f(x)}{t} = Lf(x).
+\]
+
+Ito formula
+
+Martingale Problem
+
+Reversible
+
+Invariant Dist
+
+Back equation
+
+<h2>References.</h2>
+
+<!--  Twitter -->
+<br/>
+<br/>
