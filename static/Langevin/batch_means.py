@@ -1,5 +1,6 @@
 import torch
 from torch.distributions import Normal
+from math import sqrt
 
 torch.no_grad() 
 torch.manual_seed(0)
@@ -41,23 +42,44 @@ N = 10**4
 h = .1
 X_0 = torch.zeros(2).fill_(3)
 X = OULMC(N, h, X_0)
-se = bmSE(X, 100)
 
-print(torch.mean(X, 0))
-print(se)
 
-bmSE(X, 100)
+# CI
+t = 1.660234
+mu = torch.mean(X, 0)
+se = bmSE(X, int(sqrt(N)))
+M = int(sqrt(N))
+print(mu + se * t * 1/sqrt(M))
+print(mu - se * t * 1/sqrt(M))
 
-"""
+
+###
+# Stopping criteria
+###
+torch.manual_seed(0)
+
+X = OULMC(N, h, X_0)
+se = bmSE(X, int(sqrt(N)))
+
 for i in range(0, 100):
-  X = LMC(N, h, X[N - 1, :])
+  X_new = OULMC(N, h, X[N - 1, :])
+  X = torch.cat([X, X_new], 0)
+
   se_old = se
-  se = bmSE(X, int(X.size(0)/10))
+  se = bmSE(X, int(sqrt(N)))
   print(se)
-  if torch.all(torch.abs(se - se_old) < .05):
-    print("Converged at i =", i)
+  if torch.all(torch.abs(se - se_old) < .1):
+    print("Converged at i =", i + 2)
     break
-"""
+
+# CI
+t = 1.646761
+mu = torch.mean(X, 0)
+se = bmSE(X, int(sqrt(N)))
+M = 8 * int(sqrt(N))
+print(mu + se * t * 1/sqrt(M))
+print(mu - se * t * 1/sqrt(M))
+
 
 """
 import matplotlib.pyplot as plt
