@@ -19,3 +19,6 @@ git add -A
 git commit -m"update website"
 git remote add origin https://github.com/austindavidbrown/austindavidbrown.github.io.git
 git push origin master --force
+
+Access token:
+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
